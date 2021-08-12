@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   CssBaseline,
@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import PenIcon from "@material-ui/icons/Create";
 import { PostList } from "./components/PostList";
+import { AddPostForm } from "./components/AddPostForm.js";
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,7 +34,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const App = () => {
-  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const handleOpen =()=>{
+    setOpen(true);
+  }
+  const headleClose= () =>{
+    setOpen(false);
+  }
+  const classes = useStyles
+  ();
   return (
     <>
       <CssBaseline>
@@ -46,9 +55,8 @@ const App = () => {
                 color="inherit"
               />
               <Typography
-                variant="h6"
+                variant="h5"
                 color="secondary"
-                ca
                 className={classes.title}
               >
                 <a href="http:loocalhost:3000/posts">Blogger</a>
@@ -58,7 +66,7 @@ const App = () => {
                 variant="outlined"
                 startIcon={<PenIcon />}
               >
-                New Blog
+                New Post
               </Button>
             </Toolbar>
           </AppBar>
@@ -73,6 +81,9 @@ const App = () => {
             </Grid>
           </Grid>
         </Container>
+        <AddPostForm open={open} headleClose={handleClose}>
+
+        </AddPostForm>
       </CssBaseline>
     </>
   );
