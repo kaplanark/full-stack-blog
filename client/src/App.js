@@ -9,10 +9,16 @@ import {
   Typography,
   Button,
   IconButton,
-  ThemeProvider,
 } from "@material-ui/core";
 import PenIcon from "@material-ui/icons/Create";
-const useStyles = makeStyles( theme => ({
+import { PostList } from "./components/PostList";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -39,15 +45,33 @@ const App = () => {
                 className={classes.container}
                 color="inherit"
               />
-              <Typography variant="h6" color="secondary" ca
-              className={classes.title}>
+              <Typography
+                variant="h6"
+                color="secondary"
+                ca
+                className={classes.title}
+              >
                 <a href="http:loocalhost:3000/posts">Blogger</a>
               </Typography>
-              <Button color="primary" variant="outlined" startIcon={<PenIcon/>}>
+              <Button
+                color="primary"
+                variant="outlined"
+                startIcon={<PenIcon />}
+              >
                 New Blog
               </Button>
             </Toolbar>
           </AppBar>
+          <Grid container calssName={classes.container}>
+            <Grid item xs={12}>
+              <Router>
+                <Switch>
+                  <Route exact path="/posts" component={PostList}/>
+                </Switch>
+                <Redirect from="/" to="/posts"/>
+              </Router>
+            </Grid>
+          </Grid>
         </Container>
       </CssBaseline>
     </>
